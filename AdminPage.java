@@ -17,7 +17,7 @@ public class AdminPage extends JFrame {
     private JTextField IDtxt =new JTextField(64);
     private JTextField passwordtxt =new JTextField(64);
     
-    private JButton Remove = new JButton("insert a patient");
+    private JButton Remove = new JButton("Remove the user");
     private JButton Add = new JButton("Search");
     
     public AdminPage(){
