@@ -20,20 +20,20 @@ import javax.swing.*;
 
 public class HMS extends JFrame{
         
-        String ID;
-        String Name;
-        String Address;
-        String Email;
-        String Age;
-        String IDS;
-        String Disease;
-        String Treatment;
-        String DOBirth;
-        String DOEntry;
-        String DOExit;
-        int [] intdays=new int[3];
-        int [] intmonths=new int [3];
-        int [] intyears=new int[3];
+        private String ID;
+        private String Name;
+        private String Address;
+        private String Email;
+        private String Age;
+        private String IDS;
+        private String Disease;
+        private String Treatment;
+        private String DOBirth;
+        private String DOEntry;
+        private String DOExit;
+        private int [] intdays=new int[3];
+        private int [] intmonths=new int [3];
+        private int [] intyears=new int[3];
     
         private JLabel namelbl =new JLabel("Name");
         private JLabel IDlbl =new JLabel("ID");
@@ -186,6 +186,12 @@ public class HMS extends JFrame{
         insert.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 ID= IDtxt.getText();
+                 try{
+                 int id =Integer.parseInt(IDtxt.getText());
+                 
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null,"Please enter a number in ID");
+                }
                 Age=agetxt.getText();
                 Name=nametxt.getText();
                 Address=addresstxt.getText();
