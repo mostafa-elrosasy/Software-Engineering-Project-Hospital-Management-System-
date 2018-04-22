@@ -1,4 +1,3 @@
-
 package software;
 import java.awt.*;
 import java.awt.event.*;
@@ -66,12 +65,14 @@ public class mainPage extends JFrame {
         login.setBounds(170,250,150,20);
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                int n = Integer.parseInt(passwordtxt.getText());
-                String name=usernametxt.getText();
-                if(name.equals("admin")&&n==0){
+                int n = Integer.parseInt(usernametxt.getText());
+                String password=passwordtxt.getText();
+               for (int i = 0; i < 10; i++) {
+                    if(i==n &&Software.Admins[i]!= null&& Software.Admins[i].equals(password)){
                     HMS P =new HMS();
                     close();
                     P.setVisible(true);
+                    }
                 }
             }
         });
