@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,20 +21,16 @@ import javax.swing.*;
 
 public class HMS extends JFrame{
         
-        private String ID;
-        private String Name;
-        private String Address;
-        private String Email;
-        private String Age;
-        private String IDS;
-        private String Disease;
-        private String Treatment;
-        private String DOBirth;
-        private String DOEntry;
-        private String DOExit;
-        private int [] intdays=new int[3];
-        private int [] intmonths=new int [3];
-        private int [] intyears=new int[3];
+        int ID;
+        String Name;
+        String Address;
+        String Email;
+        int  Age;
+        String Diagnosis;
+        String Treatment;
+        Date DOBirth;
+        Date DOEntry;
+        Date DOExit; 
     
         private JLabel namelbl =new JLabel("Name");
         private JLabel IDlbl =new JLabel("ID");
@@ -42,7 +39,7 @@ public class HMS extends JFrame{
         private JLabel agelbl =new JLabel("Age");
         private JLabel searchlbl =new JLabel("Enter the patient's ID:");
         private JLabel datelbl =new JLabel("Date");
-        private JLabel diseaselbl =new JLabel("Disease");
+        private JLabel diagnosislbl =new JLabel("Diagnosis");
         private JLabel treatmentlbl =new JLabel("Treatment");
         private JLabel birthlbl =new JLabel("Date of Birth");
         private JLabel entrylbl =new JLabel("Date of Entry");
@@ -54,11 +51,8 @@ public class HMS extends JFrame{
         private JTextField emailtxt =new JTextField(64);
         private JTextField agetxt =new JTextField(64);
         private JTextField IDsearchtxt = new JTextField(64);
-        private JTextField diseasetxt = new JTextField(64);
+        private JTextField diagnosistxt = new JTextField(64);
         private JTextField treatmenttxt =new JTextField(64);
-        private JTextField DOBirthtxt = new JTextField(64);
-        private JTextField DOEntrytxt = new JTextField(64);
-        private JTextField DOExittxt =new JTextField(64);
         
         private JComboBox[] day = new JComboBox[3];
         private JComboBox[]  month = new JComboBox[3];
@@ -71,6 +65,7 @@ public class HMS extends JFrame{
         private JButton edit = new JButton("Edit");
         private JButton remove = new JButton("Remove");
         private JButton show =new JButton("Show All Data");
+        private JButton back =new JButton("Back to the main menu");
         
         private patient[] p = new patient[1000];
         
@@ -111,9 +106,9 @@ public class HMS extends JFrame{
         emaillbl.setSize(50, 20);
         this.add(emaillbl);
         
-        diseaselbl.setLocation(10,260);
-        diseaselbl.setSize(50,20);
-        this.add(diseaselbl);
+        diagnosislbl.setLocation(10,260);
+        diagnosislbl.setSize(60,20);
+        this.add(diagnosislbl);
         
         treatmentlbl.setLocation(10,310);
         treatmentlbl.setSize(60,20);
@@ -144,11 +139,11 @@ public class HMS extends JFrame{
         IDtxt.setSize(200,20);
         this.add(IDtxt);
         
-        addresstxt.setLocation(90,110);
+        addresstxt.setLocation(90,160);
         addresstxt.setSize(200,20);
         this.add(addresstxt);
         
-        agetxt.setLocation(90,160);
+        agetxt.setLocation(90,110);
         agetxt.setSize(200,20);
         this.add(agetxt);
         
@@ -156,9 +151,9 @@ public class HMS extends JFrame{
         emailtxt.setSize(200,20);
         this.add(emailtxt);
         
-        diseasetxt.setLocation(90,260);
-        diseasetxt.setSize(200,20);
-        this.add(diseasetxt);
+        diagnosistxt.setLocation(90,260);
+        diagnosistxt.setSize(200,20);
+        this.add(diagnosistxt);
         
         treatmenttxt.setLocation(90,310);
         treatmenttxt.setSize(200,20);
@@ -168,77 +163,114 @@ public class HMS extends JFrame{
         IDsearchtxt.setSize(200,20);
         this.add(IDsearchtxt);
         
-        DOBirthtxt.setLocation(90,360);
-        DOBirthtxt.setSize(200,20);
-        this.add(DOBirthtxt);
-        
-        DOEntrytxt.setLocation(90,410);
-        DOEntrytxt.setSize(200,20);
-        this.add(DOEntrytxt);
-        
-        DOExittxt.setLocation(90,460);
-        DOExittxt.setSize(200,20);
-        this.add(DOExittxt);
 ////////////////////////////////////////////////////////////////////// Buttons
         insert.setLocation(90,510);
         insert.setSize(200,20);
         this.add(insert);
         insert.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                ID= IDtxt.getText();
-                 try{
-                 int id =Integer.parseInt(IDtxt.getText());
-                 
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null,"Please enter a number in ID");
-                }
-                Age=agetxt.getText();
-                Name=nametxt.getText();
-                Address=addresstxt.getText();
-                Email=emailtxt.getText();
-                Disease = diseasetxt.getText();
-                Treatment=treatmenttxt.getText();
-                DOBirth=DOBirthtxt.getText();
-                DOEntry=DOEntrytxt.getText();
-                DOExit=DOExittxt.getText();
-                String [] patient ={ID,Age,Name,Address,Email,Disease,Treatment,DOBirth,DOEntry,DOExit};
-                try {
-                    Write(patient);
-                } catch (IOException ex) {
-                    Logger.getLogger(System.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+               ID=Integer.parseInt(IDtxt.getText());
+               Name=nametxt.getText();
+               Address=addresstxt.getText();
+               Email=emailtxt.getText();
+               Age=Integer.parseInt(agetxt.getText());
+               Diagnosis=diagnosistxt.getText();
+               Treatment=treatmenttxt.getText();
+               DOBirth =new Date(Integer.parseInt(day[0].getSelectedItem().toString()),Integer.parseInt(month[0].getSelectedItem().toString()),Integer.parseInt(year[0].getSelectedItem().toString()));
+               DOEntry =new Date(Integer.parseInt(day[1].getSelectedItem().toString()),Integer.parseInt(month[1].getSelectedItem().toString()),Integer.parseInt(year[1].getSelectedItem().toString()));
+               DOExit =new Date(Integer.parseInt(day[2].getSelectedItem().toString()),Integer.parseInt(month[2].getSelectedItem().toString()),Integer.parseInt(year[2].getSelectedItem().toString()));
+               
+               patient P =new patient(ID,Name,Address,Email,Age,Diagnosis,Treatment,DOBirth,DOEntry,DOExit);
+               Software.patientsData.add(ID,P);
             }
         });
         
         search.setLocation(350,110);
         search.setSize(200,20);
         this.add(search);
+        search.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int n =Integer.parseInt(IDsearchtxt.getText());
+                    if(n<0 || n> Software.patientsData.size()){
+                        patientinfo.setText("Wrong ID");
+                    }
+                    if(Software.patientsData.size()==0){
+                        patientinfo.setText("There are no patients");
+                    }
+                    else{
+                        patientinfo.setText(Software.patientsData.get(n).toString());
+                    }
+                }
+        });
         
         edit.setLocation(350,160);
         edit.setSize(200,20);
         this.add(edit);
+        edit.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int n =Integer.parseInt(IDsearchtxt.getText());
+                    if(n<0 || n> Software.patientsData.size()){
+                        patientinfo.setText("Wrong ID");
+                    }
+                    else{
+                        IDtxt.setText(Integer.toString(Software.patientsData.get(ID).ID));
+                        nametxt.setText(Software.patientsData.get(ID).Name);
+                        addresstxt.setText(Software.patientsData.get(ID).Address);
+                        emailtxt.setText(Software.patientsData.get(ID).Email);
+                        agetxt.setText(Integer.toString(Software.patientsData.get(ID).Age));
+                        diagnosistxt.setText(Software.patientsData.get(ID).Diagnosis);
+                        treatmenttxt.setText(Software.patientsData.get(ID).Treatment);
+                    }
+                }
+        });
         
         remove.setLocation(350,210);
         remove.setSize(200,20);
         this.add(remove);
+        remove.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int n =Integer.parseInt(IDsearchtxt.getText());
+                    if(n<0 || n> Software.patientsData.size()){
+                        patientinfo.setText("Wrong ID");
+                    }
+                    else{
+                        Software.patientsData.remove(n);
+                    }
+                }
+        });
         
         show.setLocation(350,260);
         show.setSize(200,20);
         this.add(show);
+        show.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String str = "";
+                for (int i = 0; i < Software.patientsData.size(); i++) {
+                    str+=Software.patientsData.get(i).toString();
+                }
+                patientinfo.setText(str);
+            }
+        });
+        
+        back.setLocation(350,540);
+        back.setSize(200,20);
+        this.add(back);
+        back.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    mainPage P =new mainPage();
+                    close();
+                    P.setVisible(true);
+                }
+        });
 /////////////////////////////////////////////////////////////////////  Combo Boxes
-  /*      String[] days= new String[30];
+        String[] days= new String[30];
             for(int j =0;j<30;j++){
                 days[j]=""+(j+1);
             }
         for (int i = 0; i < 3; i++) {
             day[i] = new JComboBox(days);
             day[i].setBounds(100, 360 + 50 * i, 50, 20);
-            day[i].addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    intdays[i]=(int)day[i].getSelectedItem();
-                }
-            });
+          
             this.add(day[i]);
         }
         String[] months= new String[12];
@@ -258,7 +290,7 @@ public class HMS extends JFrame{
             year[i]=new JComboBox(years);
             year[i].setBounds(200,360+50*i,100,20);
             this.add(year[i]);
-        }*/
+        }
     }
     public void Write(String [] patient) throws IOException{
         String csv = "C:\\Users\\mosta\\Desktop\\software\\patients.csv";
@@ -278,43 +310,61 @@ public class HMS extends JFrame{
 //...
         csvReader.close();
     }
+    public void close(){
+        this.dispose();
+    }
     
 }
 
-/*class Date{
+class Date{
        private int day,month,year;
        public Date(int day,int month,int year){
            this.day=day;
            this.month=month;
            this.year=year;
        }
+
+    @Override
+    public String toString() {
+        return ""+day+"/"+month+"/"+year;      
+    }
+       
    }
 class patient{
-       private String name;
-       private int zipCode;
-       private String address;
-       private int ID;
-       private int phoneNumber;
-       private String email;
-       private Date DOB;
-       private Date Entry;
-       private Date Exit;
-       public patient(String name,int zipcode,String address,int ID,int phonenumber,String email,Date DOB,Date Entry,Date Exit){
-           
-           this.ID=ID;
-           this.address=address;
-           this.email=email;
-           this.name=name;
-           this.zipCode=zipcode;
-           this.phoneNumber=phonenumber;
-           this.DOB=DOB;
-       }
-       public String toString(){
-           return "name: "+this.name+"\n+"+"ID: "+this.ID+"\n"+"address: "+this.address+"\n"+"email: "+this.email+"\n"+"ZipCode: "+this.zipCode+"\n"+
-                   "PhoneNumber: "+this.phoneNumber+"\n";
-       }
-       public String getname(){
-           return this.name;
-       }
-       
-   }*/
+        int ID;
+        String Name;
+        String Address;
+        String Email;
+        int  Age;
+        String Diagnosis;
+        String Treatment;
+        Date DOBirth;
+        Date DOEntry;
+        Date DOExit;
+
+    public patient(int ID, String Name, String Address, String Email, int Age, String Diagnosis, String Treatment, Date DOBirth, Date DOEntry, Date DOExit) {
+        this.ID = ID;
+        this.Name = Name;
+        this.Address = Address;
+        this.Email = Email;
+        this.Age = Age;
+        this.Diagnosis = Diagnosis;
+        this.Treatment = Treatment;
+        this.DOBirth = DOBirth;
+        this.DOEntry = DOEntry;
+        this.DOExit = DOExit;
+    }
+
+    
+
+    @Override
+    public String toString() {
+        String str ="the paatient's ID: "+ID+"\n the patient's Address: "+Address+"\n the patien'st Email: "+Email+"\n the patient's Age: "+Age
+                +"\n the patients's Diagnosis: "+Diagnosis+"\n the treatment is: "+Treatment+"\n date of birth: "+DOBirth.toString()+"\n the date of entry: "
+                +DOEntry.toString()+"\n the date of exit: "+DOExit.toString();
+        return str;
+    }
+    
+        
+        
+   }
