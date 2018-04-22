@@ -17,8 +17,9 @@ public class AdminPage extends JFrame {
     private JTextField IDtxt =new JTextField(64);
     private JTextField passwordtxt =new JTextField(64);
     
-    private JButton Remove = new JButton("Remove the user");
-    private JButton Add = new JButton("Search");
+    private JButton Remove = new JButton("Remove the admin");
+    private JButton Add = new JButton("Add the admin");
+    private JButton back = new JButton("Back to the main menu");
     
     public AdminPage(){
         init();
@@ -50,8 +51,41 @@ public class AdminPage extends JFrame {
 ///////////////////////////////////////////////////Buttons
         Remove.setBounds(80,60,200,20);
         this.add(Remove);
+        Remove.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int n =Integer.parseInt(removetxt.getText());
+                    if(n<0 || n> 9){
+                    }
+                    else{
+                        Software.Admins[n]=null;
+                    }
+                }
+        });
         
         Add.setBounds(80,200,200,20);
         this.add(Add);
+        Add.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int n =Integer.parseInt(IDtxt.getText());
+                    if(n<0 || n> 9){
+                    }
+                    else{
+                        Software.Admins[n]=passwordtxt.getText();
+                    }
+                }
+        });
+        
+        back.setBounds(80,240,200,20);
+        this.add(back);
+        back.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    mainPage P =new mainPage();
+                    close();
+                    P.setVisible(true);
+                }
+        });
+    }
+    public void close(){
+        this.dispose();
     }
 }
