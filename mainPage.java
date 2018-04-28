@@ -14,7 +14,7 @@ public class mainPage extends JFrame {
     
     private JTextField codetxt =new JTextField(64);
     private JTextField usernametxt =new JTextField(64);
-    private JTextField passwordtxt =new JTextField(64);
+    private JPasswordField passwordtxt =new JPasswordField(64);
         
     private JButton entercode = new JButton("Enter Program Code");
     private JButton login = new JButton("Login");
