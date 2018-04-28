@@ -15,7 +15,7 @@ public class AdminPage extends JFrame {
     
     private JTextField removetxt =new JTextField(64);
     private JTextField IDtxt =new JTextField(64);
-    private JTextField passwordtxt =new JTextField(64);
+    private JPasswordField passwordtxt =new JPasswordField(64);
     
     private JButton Remove = new JButton("Remove the admin");
     private JButton Add = new JButton("Add the admin");
