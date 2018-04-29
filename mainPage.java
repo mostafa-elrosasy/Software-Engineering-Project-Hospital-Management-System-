@@ -8,7 +8,7 @@ import javax.swing.*;
  * @author mostafa
  */
 public class mainPage extends JFrame {
-    private JLabel codelbl =new JLabel("Enter The Program Code :");
+    private JLabel codelbl =new JLabel("Enter the Authorization code :");
     private JLabel usernamelbl =new JLabel("User Name :");
     private JLabel passwordlbl =new JLabel("Password :");
     
@@ -16,7 +16,7 @@ public class mainPage extends JFrame {
     private JTextField usernametxt =new JTextField(64);
     private JPasswordField passwordtxt =new JPasswordField(64);
         
-    private JButton entercode = new JButton("Enter Program Code");
+    private JButton entercode = new JButton("Get Authorization");
     private JButton login = new JButton("Login");
         
     mainPage(){
@@ -65,6 +65,7 @@ public class mainPage extends JFrame {
         login.setBounds(170,250,150,20);
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                try{
                 int n = Integer.parseInt(usernametxt.getText());
                 String password=passwordtxt.getText();
                for (int i = 0; i < 10; i++) {
@@ -73,6 +74,10 @@ public class mainPage extends JFrame {
                     close();
                     P.setVisible(true);
                     }
+                }
+                }
+                catch(NumberFormatException n){
+                    usernametxt.setText("The user name is an integer");
                 }
             }
         });
