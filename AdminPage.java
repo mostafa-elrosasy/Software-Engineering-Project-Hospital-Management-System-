@@ -53,11 +53,17 @@ public class AdminPage extends JFrame {
         this.add(Remove);
         Remove.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
+                    try{
                     int n =Integer.parseInt(removetxt.getText());
                     if(n<0 || n> 9){
+                        removetxt.setText("The user name should be between 0 and 9");
                     }
                     else{
                         Software.Admins[n]=null;
+                    }
+                    }
+                    catch(NumberFormatException n1){
+                        removetxt.setText("The user name shoild be an integer");
                     }
                 }
         });
@@ -67,10 +73,16 @@ public class AdminPage extends JFrame {
         Add.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     int n =Integer.parseInt(IDtxt.getText());
+                    try{
                     if(n<0 || n> 9){
+                        removetxt.setText("The user name should be between 0 and 9");
                     }
                     else{
                         Software.Admins[n]=passwordtxt.getText();
+                    }
+                    }
+                    catch(NumberFormatException n1){
+                        removetxt.setText("The user name shoild be an integer");
                     }
                 }
         });
