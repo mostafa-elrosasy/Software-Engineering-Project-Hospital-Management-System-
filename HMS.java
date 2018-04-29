@@ -169,6 +169,7 @@ public class HMS extends JFrame{
         this.add(insert);
         insert.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                try{
                ID=Integer.parseInt(IDtxt.getText());
                Name=nametxt.getText();
                Address=addresstxt.getText();
@@ -182,14 +183,22 @@ public class HMS extends JFrame{
                
                patient P =new patient(ID,Name,Address,Email,Age,Diagnosis,Treatment,DOBirth,DOEntry,DOExit);
                Software.patientsData.add(ID,P);
+                }
+                catch(NumberFormatException n){
+                    patientinfo.setText("The value of the age or the ID \n is wrong");
+                }
+                catch(IndexOutOfBoundsException n1){
+                    patientinfo.setText(" the ID should be: "+Software.patientsData.size());
+                }
             }
         });
         
-        search.setLocation(350,110);
+        search.setLocation(350,135);
         search.setSize(200,20);
         this.add(search);
         search.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
+                    try{
                     int n =Integer.parseInt(IDsearchtxt.getText());
                     if(n<0 || n> Software.patientsData.size()){
                         patientinfo.setText("Wrong ID");
@@ -200,19 +209,23 @@ public class HMS extends JFrame{
                     else{
                         patientinfo.setText(Software.patientsData.get(n).toString());
                     }
+                    }
+                    catch(NumberFormatException a){
+                        patientinfo.setText("The ID value should be an integer");
+                    }
                 }
         });
         
-        edit.setLocation(350,160);
+        edit.setLocation(350,190);
         edit.setSize(200,20);
         this.add(edit);
-        edit.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    int n =Integer.parseInt(IDsearchtxt.getText());
-                    if(n<0 || n> Software.patientsData.size()){
+        edit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int n = Integer.parseInt(IDsearchtxt.getText());
+                    if (n < 0 || n > Software.patientsData.size()) {
                         patientinfo.setText("Wrong ID");
-                    }
-                    else{
+                    } else {
                         IDtxt.setText(Integer.toString(Software.patientsData.get(ID).ID));
                         nametxt.setText(Software.patientsData.get(ID).Name);
                         addresstxt.setText(Software.patientsData.get(ID).Address);
@@ -222,13 +235,18 @@ public class HMS extends JFrame{
                         treatmenttxt.setText(Software.patientsData.get(ID).Treatment);
                     }
                 }
+                catch(NumberFormatException n){
+                    patientinfo.setText("The ID value should be an integer");
+                }
+            }
         });
         
-        remove.setLocation(350,210);
+        remove.setLocation(350,245);
         remove.setSize(200,20);
         this.add(remove);
         remove.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
+                    try{
                     int n =Integer.parseInt(IDsearchtxt.getText());
                     if(n<0 || n> Software.patientsData.size()){
                         patientinfo.setText("Wrong ID");
@@ -236,10 +254,14 @@ public class HMS extends JFrame{
                     else{
                         Software.patientsData.remove(n);
                     }
+                    }
+                    catch(NumberFormatException n){
+                        patientinfo.setText("The ID value should be an integer");
+                    }
                 }
         });
         
-        show.setLocation(350,260);
+        /*show.setLocation(350,260);
         show.setSize(200,20);
         this.add(show);
         show.addActionListener(new ActionListener() {
@@ -250,7 +272,7 @@ public class HMS extends JFrame{
                 }
                 patientinfo.setText(str);
             }
-        });
+        });*/
         
         back.setLocation(350,540);
         back.setSize(200,20);
