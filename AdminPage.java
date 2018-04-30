@@ -1,5 +1,5 @@
 
-package software;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Locale;
@@ -56,14 +56,18 @@ public class AdminPage extends JFrame {
                     try{
                     int n =Integer.parseInt(removetxt.getText());
                     if(n<0 || n> 9){
-                        removetxt.setText("The user name should be between 0 and 9");
+                        //removetxt.setText("The user name should be between 0 and 9");
+                        JOptionPane.showMessageDialog(null, "The user name should be between 0 and 9");
+
                     }
                     else{
                         Software.Admins[n]=null;
                     }
                     }
                     catch(NumberFormatException n1){
-                        removetxt.setText("The user name shoild be an integer");
+                        //removetxt.setText("The user name should be an integer");
+                        JOptionPane.showMessageDialog(null, "The user name should be an integer");
+
                     }
                 }
         });
@@ -72,17 +76,23 @@ public class AdminPage extends JFrame {
         this.add(Add);
         Add.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    int n =Integer.parseInt(IDtxt.getText());
-                    try{
+                    //int n =Integer.parseInt(IDtxt.getText());
+                    try{int n =Integer.parseInt(IDtxt.getText());
                     if(n<0 || n> 9){
-                        removetxt.setText("The user name should be between 0 and 9");
+                        //IDtxt.setText("The user name should be between 0 and 9");
+                        JOptionPane.showMessageDialog(null, "The user name should be between 0 and 9");
                     }
                     else{
                         Software.Admins[n]=passwordtxt.getText();
                     }
                     }
                     catch(NumberFormatException n1){
-                        removetxt.setText("The user name shoild be an integer");
+                        //IDtxt.setText("The user name should be an integer");
+                        JOptionPane.showMessageDialog(null, "The user name should be an integer");
+                    }
+                    catch (Exception n2){
+                        //IDtxt.setText("The user name should be an integer");
+                        JOptionPane.showMessageDialog(null, "The user name should be an integer");
                     }
                 }
         });

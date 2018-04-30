@@ -1,4 +1,4 @@
-package software;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Locale;
@@ -51,13 +51,17 @@ public class mainPage extends JFrame {
         entercode.setBounds(85,110,200,20);
         entercode.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                int n =Integer.parseInt(codetxt.getText());
-                if(n==0){
-                    AdminPage P =new AdminPage();
-                    close();
-                    P.setVisible(true);
+                try {
+                    int n = Integer.parseInt(codetxt.getText());
+                    if (n == 0) {
+                        AdminPage P = new AdminPage();
+                        close();
+                        P.setVisible(true);
+                    }
+                }catch (NumberFormatException e1){
+                    //entercode.setText("The Code is an integer");
+                    JOptionPane.showMessageDialog(null, "The Code is an integer");
                 }
-                
             }
         });
         this.add(entercode);
@@ -77,7 +81,9 @@ public class mainPage extends JFrame {
                 }
                 }
                 catch(NumberFormatException n){
-                    usernametxt.setText("The user name is an integer");
+                    //usernametxt.setText("The user name is an integer");
+                    JOptionPane.showMessageDialog(null, "The user name is an integer");
+
                 }
             }
         });

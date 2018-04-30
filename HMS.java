@@ -1,7 +1,6 @@
-package software;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
+
+import au.com.bytecode.opencsv.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
@@ -185,10 +184,12 @@ public class HMS extends JFrame{
                Software.patientsData.add(ID,P);
                 }
                 catch(NumberFormatException n){
-                    patientinfo.setText("The value of the age or the ID \n is wrong");
+                    //patientinfo.setText("The value of the age or the ID \n is wrong");
+                    JOptionPane.showMessageDialog(null, "The value of the age or the ID \n is wrong");
                 }
                 catch(IndexOutOfBoundsException n1){
-                    patientinfo.setText(" the ID should be: "+Software.patientsData.size());
+                    //patientinfo.setText(" the ID should be: "+Software.patientsData.size());
+                    JOptionPane.showMessageDialog(null, " the ID should be: "+Software.patientsData.size());
                 }
             }
         });
@@ -201,17 +202,20 @@ public class HMS extends JFrame{
                     try{
                     int n =Integer.parseInt(IDsearchtxt.getText());
                     if(n<0 || n> Software.patientsData.size()){
-                        patientinfo.setText("Wrong ID");
+                        //patientinfo.setText("Wrong ID");
+                        JOptionPane.showMessageDialog(null, "Wrong ID");
                     }
                     if(Software.patientsData.size()==0){
-                        patientinfo.setText("There are no patients");
+                        //patientinfo.setText("There are no patients");
+                        JOptionPane.showMessageDialog(null, "There are no patients");
                     }
                     else{
                         patientinfo.setText(Software.patientsData.get(n).toString());
                     }
                     }
                     catch(NumberFormatException a){
-                        patientinfo.setText("The ID value should be an integer");
+                        //patientinfo.setText("The ID value should be an integer");
+                        JOptionPane.showMessageDialog(null, "The ID value should be an integer");
                     }
                 }
         });
@@ -224,7 +228,8 @@ public class HMS extends JFrame{
                 try {
                     int n = Integer.parseInt(IDsearchtxt.getText());
                     if (n < 0 || n > Software.patientsData.size()) {
-                        patientinfo.setText("Wrong ID");
+                        //patientinfo.setText("Wrong ID");
+                        JOptionPane.showMessageDialog(null, "Wrong ID");
                     } else {
                         IDtxt.setText(Integer.toString(Software.patientsData.get(ID).ID));
                         nametxt.setText(Software.patientsData.get(ID).Name);
@@ -236,7 +241,9 @@ public class HMS extends JFrame{
                     }
                 }
                 catch(NumberFormatException n){
-                    patientinfo.setText("The ID value should be an integer");
+                    //patientinfo.setText("The ID value should be an integer");
+                    JOptionPane.showMessageDialog(null, "The ID value should be an integer");
+
                 }
             }
         });
@@ -249,14 +256,17 @@ public class HMS extends JFrame{
                     try{
                     int n =Integer.parseInt(IDsearchtxt.getText());
                     if(n<0 || n> Software.patientsData.size()){
-                        patientinfo.setText("Wrong ID");
+                        //patientinfo.setText("Wrong ID");
+                        JOptionPane.showMessageDialog(null, "Wrong ID");
                     }
                     else{
                         Software.patientsData.remove(n);
                     }
                     }
                     catch(NumberFormatException n){
-                        patientinfo.setText("The ID value should be an integer");
+                        //patientinfo.setText("The ID value should be an integer");
+                        JOptionPane.showMessageDialog(null, "The ID value should be an integer");
+
                     }
                 }
         });
